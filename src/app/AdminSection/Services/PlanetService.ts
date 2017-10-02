@@ -12,6 +12,7 @@ export class PlanetService  extends BaseService  {
   httpService: Http;
   constructor(_logService: Logger , _httpService: Http) {
       super(_logService);
+      this.httpService = _httpService;
   }
 
   GetByPage = (page: number): Promise<any> => {
