@@ -19,7 +19,7 @@
                       <tr *ngFor="let planet of model.planets">
                           <td>
                               <div>{{planet.name}}</div>
-                              <div><img [src] ="'../scripts/app/images/planets/'+ planet.name + '.jpeg'" class="imagesize" alt="planet" /></div>
+                              <div><img [src] ="'./assets/images/planets/'+ planet.name + '.jpeg'" class="imagesize" alt="planet" /></div>
                           </td>
                           <td>{{planet.rotation_period}}</td>
                           <td>{{planet.diameter}}</td>
