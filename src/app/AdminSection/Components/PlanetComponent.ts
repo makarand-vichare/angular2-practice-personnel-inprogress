@@ -44,8 +44,8 @@ export class PlanetComponent extends BaseComponent implements OnInit {
      self.planetService.GetByPage(page)
           .then(function (response: any) {
             self.model.planets = self.SetRandomDistance(response.results);
-            self.model.next = response.data.next;
-            self.model.previous = response.data.previous;
+            self.model.next = response.next;
+            self.model.previous = response.previous;
 
             self.ProcessInfo.IsSucceed = true;
             self.ProcessInfo.Message = 'suceeded';
@@ -63,8 +63,8 @@ export class PlanetComponent extends BaseComponent implements OnInit {
     self.planetService.GetByUrl(url)
           .then(function (response: any) {
             self.model.planets = self.SetRandomDistance(response.results);
-            self.model.next = response.data.next;
-            self.model.previous = response.data.previous;
+            self.model.next = response.next;
+            self.model.previous = response.previous;
             self.ProcessInfo.IsSucceed = true;
               self.ProcessInfo.Message = 'suceeded';
               self.ProcessInfo.Loading = false;
