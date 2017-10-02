@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12">
+          <div class="table-responsive">
+              <table summary="Planet list from swapi.io" class="table table-bordered table-hover">
+                  <caption class="text-center"><h2>Planet List</h2></caption>
+                  <thead>
+                      <tr class="tableheader">
+                          <th>Name</th>
+                          <th>Rotation Period</th>
+                          <th>Diameter</th>
+                          <th>Gravity</th>
+                          <th>Population</th>
+                          <th>Climate</th>
+                          <th>Distance MGLT</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let planet of model.planets">
+                          <td>
+                              <div>{{planet.name}}</div>
+                              <div><img [src] ="'../scripts/app/images/planets/'+ planet.name + '.jpeg'" class="imagesize" alt="planet" /></div>
+                          </td>
+                          <td>{{planet.rotation_period}}</td>
+                          <td>{{planet.diameter}}</td>
+                          <td>{{planet.gravity}}</td>
+                          <td>{{planet.population}}</td>
+                          <td>{{planet.climate}}</td>
+                          <td>{{planet.Distance}}</td>
+                      </tr>
+                      <tr *ngIf="!model.planets"><td colspan="6">No planets found.</td></tr>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td colspan="6" class="pagermiddle">
+                              <button class="btn btn-md btn-default text-left" [disabled] ="!model.previous" (click)="GetByUrl(model.previous)">Previous</button>
+                              <button class="btn btn-md btn-default pull-right" [disabled] ="!model.next" (click)="GetByUrl(model.next)">Next</button>
+                          </td>
+                          <td class="text-right">
+                              <button class="btn btn-md btn-info" (click)="InfoMessage()">Add New Planet</button>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
