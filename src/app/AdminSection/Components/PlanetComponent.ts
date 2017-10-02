@@ -1,12 +1,12 @@
-/// <reference path="../../../../node_modules/@types/toastr/index.d.ts" />
 import { PlanetService } from './../Services/PlanetService';
 import { AppConstants } from './../../Common/AppConstants';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { BaseComponent } from '../../Common/Components/BaseComponent';
 import { PlanetVM } from '../ViewModels/PlanetVM';
 import {Router} from '@angular/router';
 import {LOG_LOGGER_PROVIDERS , Logger} from 'angular2-logger/core';
 import {plainToClass} from 'class-transformer';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-planet',
@@ -15,8 +15,10 @@ import {plainToClass} from 'class-transformer';
 })
 
 export class PlanetComponent extends BaseComponent implements OnInit {
-  constructor(_routerService: Router, _logService: Logger, private planetService: PlanetService) {
+  constructor(_routerService: Router, _logService: Logger, private planetService: PlanetService,
+        private toastr: ToastsManager, vRef: ViewContainerRef) {
       super(_routerService , _logService);
+      this.toastr.setRootViewContainerRef(vRef);
   }
 
   model: {
@@ -74,7 +76,7 @@ export class PlanetComponent extends BaseComponent implements OnInit {
   }
 
   InfoMessage = () => {
-      toastr.info('App Demo', 'This feature is not yet implmented.');
+      this.toastr.info('App Demo', 'This feature is not yet implmented.');
   }
 
   private SetRandomDistance = (results: Array<Object>): Array<PlanetVM> => {
