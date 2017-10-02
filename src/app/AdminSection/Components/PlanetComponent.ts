@@ -46,11 +46,11 @@ export class PlanetComponent extends BaseComponent implements OnInit {
             self.model.previous = response.data.previous;
 
             self.ProcessInfo.IsSucceed = true;
-            self.ProcessInfo.Message = response.data.message;
+            self.ProcessInfo.Message = 'suceeded';
             self.ProcessInfo.Loading = false;
           })
           .catch(function (response: any) {
-            self.ProcessInfo.Message = response.data.message;
+            self.ProcessInfo.Message = 'failed';
             self.ProcessInfo.Loading = false;
           });
   }
@@ -64,11 +64,11 @@ export class PlanetComponent extends BaseComponent implements OnInit {
             self.model.next = response.data.next;
             self.model.previous = response.data.previous;
             self.ProcessInfo.IsSucceed = true;
-              self.ProcessInfo.Message = response.data.message;
+              self.ProcessInfo.Message = 'suceeded';
               self.ProcessInfo.Loading = false;
           })
           .catch(function (response: any) {
-              self.ProcessInfo.Message = response.data.message;
+              self.ProcessInfo.Message = 'failed';
               self.ProcessInfo.Loading = false;
           });
   }
