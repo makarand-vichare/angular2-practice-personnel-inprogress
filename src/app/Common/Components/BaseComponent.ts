@@ -1,20 +1,27 @@
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import {Router} from '@angular/router';
 import {Logger} from 'angular2-logger/core';
 import { IDictionary } from '../Interfaces/IDictionary';
 import { MessageVM } from '../Viewmodels/MessageVM';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 export class BaseComponent {
 
   protected routerService: Router;
   protected logService: Logger;
-
-  constructor(_routerService: Router, _logService: Logger) {
-     this.routerService = _routerService;
+  protected toastr: ToastsManager;
+  constructor(_routerService: Router, _logService: Logger, _toastr: ToastsManager, vRef: ViewContainerRef) {
+      this.routerService = _routerService;
       this.logService = _logService;
+      this.toastr = _toastr;
+      this.toastr.setRootViewContainerRef(vRef);
   }
 
   ProcessInfo = { Message: '' } as MessageVM;
 
+  InfoMessage = () => {
+    this.toastr.info('App Demo', 'This feature is not yet implmented.');
+  }
   StartProcess() {
        this.ProcessInfo = {
           Message: 'loading..',

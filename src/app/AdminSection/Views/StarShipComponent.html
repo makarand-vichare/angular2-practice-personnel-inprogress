@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12">
+          <div class="table-responsive">
+              <table summary="Starship list from swapi.io" class="table table-bordered table-hover">
+                  <caption class="text-center"><h2>Starship List</h2></caption>
+                  <thead>
+                      <tr class="tableheader">
+                          <th>Name</th>
+                          <th>Model</th>
+                          <th>Crew</th>
+                          <th>Passengers</th>
+                          <th>Cargo Capacity</th>
+                          <th>Consumables</th>
+                          <th>MGLT</th>
+                          <th>Hyperdrive Rating</th>
+                          <th>Max Atmosphering Speed</th>
+                          <th>Starship Class</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let starship of model.starships">
+                          <td>
+                              <div>{{starship.name}}</div>
+                              <div><img [src]="'./assets/images/starships/'+ starship.name +'.jpg'" class="imagesize" alt="starship" /></div>
+                          </td>
+                          <td>{{starship.model}}</td>
+                          <td>{{starship.crew}}</td>
+                          <td>{{starship.passengers}}</td>
+                          <td>{{starship.cargo_capacity}}</td>
+                          <td>{{starship.consumables}}</td>
+                          <td>{{starship.MGLT}}</td>
+                          <td>{{starship.hyperdrive_rating}}</td>
+                          <td>{{starship.max_atmosphering_speed}}</td>
+                          <td>{{starship.starship_class}}</td>
+                      </tr>
+                      <tr *ngIf="!model.starships"><td colspan="10">No starships found.</td></tr>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td colspan="9" class="pagermiddle">
+                              <button class="btn btn-md btn-default text-left" [disabled]="!model.previous" (click)="GetByUrl(model.previous)">Previous</button>
+                              <button class="btn btn-md btn-default pull-right" [disabled]="!model.next" (click)="GetByUrl(model.next)">Next</button>
+                          </td>
+                          <td class="text-right">
+                              <button class="btn btn-md btn-info" (click) ="InfoMessage()">Add New Starship</button>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

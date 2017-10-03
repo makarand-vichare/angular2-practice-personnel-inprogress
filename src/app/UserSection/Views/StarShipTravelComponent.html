@@ -1,0 +1,159 @@
+<!-- <div class="container">
+  <div class="row" ng-controller="AdminSection.Controllers.PlanetController as planetCtrl">
+      <div class="col-xs-12" ng-controller="UsersSection.Controllers.StarshipTravelController as starshiptravelCtrl">
+          <div class="table-responsive">
+              <table summary="Starship travel & resupply count" class="table table-bordered table-hover">
+                  <caption class="text-left">
+                      <span class="resupply-count-caption">Starship Resupply Stop(s) Count</span>
+                      <span class="pull-right">
+                          <input type="number" required [class]="invalidDistance?'invalidDistance invalid':''"
+                                 class="form-control-static planet-distance"
+                                 ng-model="planetDistance" placeholder="Enter Travel distance in MGLT" />
+                          <button class="btn btn-info" (click)="GetShipsSupplyCount()">Calculate</button>
+                      </span>
+                  </caption>
+                  <caption>
+                      <span class="pull-right" *ngFor="planet of GetReachablePlanets(planetCtrl.model.planets)">
+                          <a href="" (click)="OpenPlanetModel(planet)">
+                              <img [src]="'./assets/images/planets/'+ planet.name +'.jpeg'" class="imagesmallsize" alt="planet" />
+                          </a>
+                      </span>
+                      <span class="pull-right planets-lists">Planets in reach(click for more info) : </span>
+                  </caption>
+                  <thead>
+                      <tr class="tableheader">
+                          <th>Name</th>
+                          <th>Crew</th>
+                          <th>Consumables</th>
+                          <th>MGLT / hr</th>
+                          <th>Stop(s) Required</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="starship in starships">
+                          <td>
+                              <div>{{starship.name}}</div>
+                              <div><img [src]="'./assets/images/starships/'+ starship.name +'.jpg'" class="imagesize" alt="here should be an image" /></div>
+                              <div><button class="btn-xs btn-info pull-right" (click)="OpenStarshipModel(starship)">Details</button></div>
+                          </td>
+                          <td>{{starship.crew}}</td>
+                          <td>{{starship.consumables}}</td>
+                          <td>{{starship.MGLT}}</td>
+                          <td>{{starship.ReSupplyCount}}</td>
+                      </tr>
+                      <tr ng-if="!starships"><td colspan="6">No starships found.</td></tr>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td colspan="5" class="pagermiddle">
+                              <button class="btn btn-md btn-default text-left" [disabled]="!previous" (click)="GetByUrl(previous)">Previous</button>
+                              <button class="btn btn-md btn-default pull-right" [disabled]="!next" (click)="GetByUrl(next)">Next</button>
+                          </td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+          <script type="text/ng-template" id="starshipModal.html">
+              <div class="modal-header">
+                  <h3 class="modal-title">Starship Details</h3>
+              </div>
+              <div class="modal-body">
+                  <table summary="Starship Details" class="table table-bordered table-hover">
+                      <tbody>
+                          <tr>
+                              <td class="fieldCaption">Name</td>
+                              <td>{{popup.selectedItem.name}}</td>
+                              <td class="fieldCaption">Model</td>
+                              <td>{{popup.selectedItem.model}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Manufacturer</td>
+                              <td>{{popup.selectedItem.manufacturer}}</td>
+                              <td class="fieldCaption">Cost In Credits</td>
+                              <td>{{popup.selectedItem.cost_in_credits}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Ship Length</td>
+                              <td>{{popup.selectedItem.length}}</td>
+                              <td class="fieldCaption">Max Atmosphering Speed</td>
+                              <td>{{popup.selectedItem.max_atmosphering_speed}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Crew</td>
+                              <td>{{popup.selectedItem.crew}}</td>
+                              <td class="fieldCaption">Passengers</td>
+                              <td>{{popup.selectedItem.passengers}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Cargo Capacity</td>
+                              <td>{{popup.selectedItem.cargo_capacity}}</td>
+                              <td class="fieldCaption">Consumables</td>
+                              <td>{{popup.selectedItem.consumables}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Hyperdrive Rating</td>
+                              <td>{{popup.selectedItem.hyperdrive_rating}}</td>
+                              <td class="fieldCaption">Starship Class</td>
+                              <td>{{popup.selectedItem.starship_class}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">ReSupplyCount</td>
+                              <td>{{popup.selectedItem.ReSupplyCount}}</td>
+                              <td class="fieldCaption">MGLT</td>
+                              <td>{{popup.selectedItem.MGLT}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-warning" type="button" (click)="popup.Close()">Close</button>
+              </div>
+          </script>
+          <script type="text/ng-template" id="planetModal.html">
+              <div class="modal-header">
+                  <h3 class="modal-title">Planet Details</h3>
+              </div>
+              <div class="modal-body">
+                  <table summary="Planet Details" class="table table-bordered table-hover">
+                      <tbody>
+                          <tr>
+                              <td class="fieldCaption">Name</td>
+                              <td>{{popup.selectedItem.name}}</td>
+                              <td class="fieldCaption">Rotation Period</td>
+                              <td>{{popup.selectedItem.rotation_period}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Orbital Period</td>
+                              <td>{{popup.selectedItem.orbital_period}}</td>
+                              <td class="fieldCaption">Diameter</td>
+                              <td>{{popup.selectedItem.diameter}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Climate</td>
+                              <td>{{popup.selectedItem.climate}}</td>
+                              <td class="fieldCaption">Gravity</td>
+                              <td>{{popup.selectedItem.gravity}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Terrain</td>
+                              <td>{{popup.selectedItem.terrain}}</td>
+                              <td class="fieldCaption">Surface Water</td>
+                              <td>{{popup.selectedItem.surface_water}}</td>
+                          </tr>
+                          <tr>
+                              <td class="fieldCaption">Population</td>
+                              <td>{{popup.selectedItem.population}}</td>
+                              <td class="fieldCaption">Distance</td>
+                              <td>{{popup.selectedItem.Distance}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="modal-footer">
+                  <button class="btn btn-warning" type="button" (click)="popup.Close()">Close</button>
+              </div>
+          </script>
+
+      </div>
+  </div>
+</div> -->

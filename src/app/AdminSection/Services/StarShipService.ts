@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 @Injectable()
-export class PlanetService  extends BaseService  {
+export class StarShipService  extends BaseService  {
 
   constructor(_logService: Logger , _httpService: Http) {
       super(_logService, _httpService);
@@ -19,7 +19,19 @@ export class PlanetService  extends BaseService  {
               params: {page: page}
       } as RequestOptionsArgs;
 
-      return this.httpService.get(AppConstants.SWAPIUrl + '/planets/', config).map(response => {
+      return this.httpService.get(AppConstants.SWAPIUrl + '/starships/', config).map(response => {
+        return response.json() || {success: false, message: 'No response from server'};
+      }).catch((error: Response | any) => {
+        return Observable.throw(error.json());
+      }).toPromise();
+  }
+
+  GetAll = (): Promise<any> => {
+      const  config = {
+          'Accept': 'application/json', 'Access-Control-Allow-Headers': 'Content-Type, x-xsrf-token'
+      } as RequestOptionsArgs;
+
+      return this.httpService.get(AppConstants.SWAPIUrl + '/starships/', config).map(response => {
         return response.json() || {success: false, message: 'No response from server'};
       }).catch((error: Response | any) => {
         return Observable.throw(error.json());
