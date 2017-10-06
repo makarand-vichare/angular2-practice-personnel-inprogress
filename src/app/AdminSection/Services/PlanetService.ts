@@ -5,6 +5,7 @@ import { Logger } from 'angular2-logger/core';
 import {Http , Response , RequestOptionsArgs} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
+import { PlanetVM } from '../ViewModels/PlanetVM';
 
 @Injectable()
 export class PlanetService  extends BaseService  {
@@ -19,8 +20,14 @@ export class PlanetService  extends BaseService  {
               params: {page: page}
       } as RequestOptionsArgs;
 
-      return this.httpService.get(AppConstants.SWAPIUrl + '/planets/', config).map(response => {
-        return response.json() || {success: false, message: 'No response from server'};
+      return this.httpService.get(AppConstants.SWAPIUrl + '/planets/', config)
+      .map(response => {
+         const result = response.json();
+         if (result != null) {
+          result.results = this.SetRandomDistance(result.results);
+          return result;
+         }
+        return {success: false, message: 'No response from server'};
       }).catch((error: Response | any) => {
         return Observable.throw(error.json());
       }).toPromise();

@@ -1,3 +1,9 @@
-<p>
-  HomeComponent.ts works!
-</p>
+<div>
+  <button class="btn btn-block m-b-sm" (click)="CheckApiUrl()">Get User Info for login</button>
+  <ul class="list-group ">
+    <li [visibility]="users" class="list-group-item"> Available Users List : </li>
+    <li [visibility]="users" class="list-group-item" *ngFor="user of users">
+      UserName : {{user.userName}} -- Password : {{user.password}}
+    </li>
+  </ul>
+</div>

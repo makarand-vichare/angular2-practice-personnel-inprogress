@@ -5,7 +5,6 @@ import { BaseComponent } from '../../Common/Components/BaseComponent';
 import { PlanetVM } from '../ViewModels/PlanetVM';
 import {Router} from '@angular/router';
 import {LOG_LOGGER_PROVIDERS , Logger} from 'angular2-logger/core';
-import {plainToClass} from 'class-transformer';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
@@ -42,7 +41,7 @@ export class PlanetComponent extends BaseComponent implements OnInit {
 
      self.planetService.GetByPage(page)
           .then(function (response: any) {
-            self.model.planets = self.SetRandomDistance(response.results);
+            self.model.planets = response.results;
             self.model.next = response.next;
             self.model.previous = response.previous;
 
@@ -61,7 +60,7 @@ export class PlanetComponent extends BaseComponent implements OnInit {
     self.StartProcess();
     self.planetService.GetByUrl(url)
           .then(function (response: any) {
-            self.model.planets = self.SetRandomDistance(response.results);
+            self.model.planets = response.results;
             self.model.next = response.next;
             self.model.previous = response.previous;
             self.ProcessInfo.IsSucceed = true;
@@ -72,13 +71,5 @@ export class PlanetComponent extends BaseComponent implements OnInit {
               self.ProcessInfo.Message = 'failed';
               self.ProcessInfo.Loading = false;
           });
-  }
-
-  private SetRandomDistance = (results: Array<Object>): Array<PlanetVM> => {
-      const planets = plainToClass(PlanetVM, results);
-      planets.forEach((planet) => {
-          planet.Distance = Math.floor(Math.random() * AppConstants.RandomDistance * 2);
-      });
-      return planets;
   }
 }

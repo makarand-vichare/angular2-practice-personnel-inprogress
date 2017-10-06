@@ -1,3 +1,4 @@
+import { StarShipVM } from './../../AdminSection/ViewModels/StarShipVM';
 import { Response } from '@angular/http';
 import { StarShipTravelService } from './../Services/StarShipTravelService';
 import { AppConstants } from './../../Common/AppConstants';
@@ -7,18 +8,18 @@ import { StarShipTravelVM } from '../ViewModels/StarShipTravelVM';
 import { PlanetVM } from '../../AdminSection/ViewModels/PlanetVM';
 import { Router} from '@angular/router';
 import { LOG_LOGGER_PROVIDERS , Logger} from 'angular2-logger/core';
-import { plainToClass} from 'class-transformer';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { PlanetService } from '../../AdminSection/Services/PlanetService';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-shiptravel',
   templateUrl: './../Views/StarShipTravelComponent.html',
-  providers: [StarShipTravelService , LOG_LOGGER_PROVIDERS]
+  providers: [PlanetService, StarShipTravelService , LOG_LOGGER_PROVIDERS]
 })
 
 export class StarShipTravelComponent extends BaseComponent implements OnInit {
-  constructor(_routerService: Router, _logService: Logger, private planetService: PlanetService,
+  constructor(private modalService: NgbModal, _routerService: Router, _logService: Logger, private planetService: PlanetService,
          private starShipTravelService: StarShipTravelService,
         _toastr: ToastsManager, _vRef: ViewContainerRef) {
       super(_routerService , _logService, _toastr, _vRef);
@@ -28,53 +29,89 @@ export class StarShipTravelComponent extends BaseComponent implements OnInit {
     starships: Array<StarShipTravelVM>,
     next: string,
     previous: string
-  } ;
+  };
 
-  planetDistance: number = AppConstants.RandomDistance;
+  planetModel: {
+    planets: Array<PlanetVM>,
+    next: string,
+    previous: string
+  };
+
+  selectedPlanet: PlanetVM;
+  selectedStarShip: StarShipTravelVM;
+  planetDistance: number;
   invalidDistance = false;
+  closeResult: string;
 
   ngOnInit() {
     const self = this;
-    // self.GetPlanets(1);
     self.starshipModel = {
       starships: new Array<StarShipTravelVM>(),
       next: '',
       previous: ''
     };
+
+    self.planetModel = {
+      planets: new Array<PlanetVM>(),
+      next: '',
+      previous: ''
+    };
+
+     self.selectedPlanet = new PlanetVM();
+     self.selectedStarShip = new StarShipTravelVM();
+     self.planetDistance = AppConstants.RandomDistance;
+     self.GetAllPlanets();
   }
 
+  OpenStarShipModel = (starShipModalTemplate, starship: StarShipTravelVM) => {
+    const self = this;
+    self.selectedStarShip = starship;
+    self.modalService.open(starShipModalTemplate).result.then((result: StarShipVM) => {
+      self.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      self.closeResult = `Dismissed ${self.getDismissReason(reason)}`;
+    });
+  }
 
-  // OpenStarshipModel = (starship: StarShipTravelVM) => {
-  //     var self = this;
-  //     var modalInstance: ng.ui.bootstrap.IModalServiceInstance = self.modelService.open({
-  //         templateUrl: 'starshipModal.html',
-  //         controller: Common.Controllers.ModelController,
-  //         bindToController: true,
-  //         controllerAs: 'popup',
-  //         resolve: {
-  //             item: () => starship // <- this will pass the same instance
-  //             // of the item displayed in the table to the modal
-  //         }
-  //     });
+  OpenPlanetModel = (planetModalTemplate, planet: PlanetVM) => {
+    const self = this;
+    self.selectedPlanet = planet;
+    self.modalService.open(planetModalTemplate).result.then((result) => {
+      self.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      self.closeResult = `Dismissed ${self.getDismissReason(reason)}`;
+    });
+  }
 
-  //     modalInstance.result.then((selectedItem: StarShipTravelVM) => {
-  //         // self.selectedStarship = selectedItem;
-  //     });
-  // };
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 
-  // OpenPlanetModel = (planet: PlanetVM) => {
-  //     var self = this;
-  //     var modalInstance: ng.ui.bootstrap.IModalServiceInstance = self.modelService.open({
-  //         templateUrl: 'planetModal.html',
-  //         controller: Common.Controllers.ModelController,
-  //         bindToController: true,
-  //         controllerAs: 'popup',
-  //         resolve: {
-  //             item: () => planet // <- this will pass the same instance
-  //             // of the item displayed in the table to the modal
-  //         }
-  //     });
-  // };
+  GetAllPlanets = () => {
+    const self = this;
+    self.StartProcess();
+
+    self.planetService.GetByPage(1)
+         .then(function (response: any) {
+           self.planetModel.planets = response.results;
+           self.planetModel.next = response.next;
+           self.planetModel.previous = response.previous;
+
+           self.ProcessInfo.IsSucceed = true;
+           self.ProcessInfo.Message = 'suceeded';
+           self.ProcessInfo.Loading = false;
+         })
+         .catch(function (response: any) {
+           self.ProcessInfo.Message = 'failed';
+           self.ProcessInfo.Loading = false;
+         });
+ }
 
   GetShipsSupplyCount = () => {
     const self = this;
@@ -109,5 +146,13 @@ export class StarShipTravelComponent extends BaseComponent implements OnInit {
               self.ProcessInfo.Message = 'suceeded';
               self.ProcessInfo.Loading = false;
           });
+  }
+
+  GetReachablePlanets = (): Array<PlanetVM> => {
+    const self = this;
+    const filtered = self.planetModel.planets.filter((planet) => {
+        return planet.Distance < self.planetDistance;
+    });
+    return filtered;
   }
 }

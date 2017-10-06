@@ -2,6 +2,9 @@ import {Logger} from 'angular2-logger/core';
 import {Http , Response , RequestOptionsArgs} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
+import {plainToClass} from 'class-transformer';
+import { PlanetVM } from '../../AdminSection/ViewModels/PlanetVM';
+import { AppConstants } from '../../Common/AppConstants';
 
 export class BaseService {
   protected logService: Logger;
@@ -22,9 +25,22 @@ export class BaseService {
     } as RequestOptionsArgs;
 
     return this.httpService.get(url, config).map(response => {
-      return response.json() || {success: false, message: 'No response from server'};
+      const result = response.json();
+      if (result != null) {
+       result.results = this.SetRandomDistance(result.results);
+       return result;
+      }
+     return {success: false, message: 'No response from server'};
     }).catch((error: Response | any) => {
       return Observable.throw(error.json());
     }).toPromise();
-}
+  }
+
+  SetRandomDistance = (results: Array<Object>): Array<PlanetVM> => {
+    const planets = plainToClass(PlanetVM, results);
+    planets.forEach((planet) => {
+        planet.Distance = Math.floor(Math.random() * AppConstants.RandomDistance * 2);
+    });
+    return planets;
+  }
 }
