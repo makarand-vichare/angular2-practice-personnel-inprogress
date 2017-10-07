@@ -6,8 +6,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './RootComponent.html',
-  styleUrls: ['./RootComponent.css'],
+  templateUrl: './../Views/RootComponent.html',
+  styleUrls: ['./../Views/RootComponent.css'],
   providers: [LOG_LOGGER_PROVIDERS]
 })
 export class RootComponent implements OnInit {

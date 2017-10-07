@@ -10,7 +10,7 @@ import { LoginVM } from '../../AdminSection/ViewModels/LoginVM';
 
 @Component({
     selector: 'app-login',
-    templateUrl: './iews/LoginComponent.html',
+    templateUrl: './../Views/LoginComponent.html',
     providers: [AuthService, LOG_LOGGER_PROVIDERS]
 })
 

@@ -1,8 +1,8 @@
 <div>
   <button class="btn btn-block m-b-sm" (click)="CheckApiUrl()">Get User Info for login</button>
-  <ul class="list-group ">
-    <li [visibility]="users" class="list-group-item"> Available Users List : </li>
-    <li [visibility]="users" class="list-group-item" *ngFor="user of users">
+  <ul class="list-group">
+    <li [hidden]="!users" class="list-group-item"> Available Users List : </li>
+    <li [hidden]="!users" class="list-group-item" *ngFor="let user of users">
       UserName : {{user.userName}} -- Password : {{user.password}}
     </li>
   </ul>

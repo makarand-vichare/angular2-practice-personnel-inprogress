@@ -7,13 +7,13 @@ import { AuthenticationVM } from '../../AdminSection/ViewModels/AuthenticationVM
 
 @Component({
   selector: 'app-login-menu',
-  templateUrl: './LoginMenuComponent.html',
-  styleUrls: ['./LoginMenuComponent.css'],
+  templateUrl: './../Views/LoginMenuComponent.html',
+  styleUrls: ['./../Views/LoginMenuComponent.css'],
   providers: [AuthService, LOG_LOGGER_PROVIDERS]
 })
 
 export class LoginMenuComponent implements OnInit {
-  constructor(private authService: AuthService , private routerService: Router, private locationService: Location) {
+  constructor(private authService: AuthService , private routerService: Router) {
   }
 
   authenticationVM: AuthenticationVM;
