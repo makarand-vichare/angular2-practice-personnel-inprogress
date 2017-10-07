@@ -8,7 +8,7 @@ import { AuthenticationVM } from '../../AdminSection/ViewModels/AuthenticationVM
 @Component({
   selector: 'app-login-menu',
   templateUrl: './../Views/LoginMenuComponent.html',
-  styleUrls: ['./../Views/LoginMenuComponent.css'],
+  styleUrls: ['./../Views/LoginMenuComponent.less'],
   providers: [AuthService, LOG_LOGGER_PROVIDERS]
 })
 

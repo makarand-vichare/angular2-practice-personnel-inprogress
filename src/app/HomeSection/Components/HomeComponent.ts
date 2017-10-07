@@ -10,6 +10,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
   selector: 'app-home',
   templateUrl: './../Views/HomeComponent.html',
+  styleUrls: ['./../Views/HomeComponent.less'],
   providers: [HomeService, LOG_LOGGER_PROVIDERS]
 })
 

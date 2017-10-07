@@ -11,6 +11,7 @@ import { LoginVM } from '../../AdminSection/ViewModels/LoginVM';
 @Component({
     selector: 'app-login',
     templateUrl: './../Views/LoginComponent.html',
+    styleUrls: ['./../Views/LoginComponent.less'],
     providers: [AuthService, LOG_LOGGER_PROVIDERS]
 })
 

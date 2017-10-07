@@ -1,9 +1,9 @@
-<ul class="nav navbar-nav navbar-right">
-  <li><a href="/HomeSection/#/home">Users</a></li>
-  <li ng-hide="!authenticationVM.IsAuth"><a href="/UsersSection">Starship Travel & Resupply</a></li>
-  <li ng-if="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a href="/AdminSection/#/starships">Starships</a></li>
-  <li ng-if="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a href="/AdminSection/#/planets">Planets</a></li>
-  <li ng-if="authenticationVM.IsAuth"><a href="">Welcome {{authenticationVM.UserName}}</a></li>
-  <li ng-hide="!authenticationVM.IsAuth"><a href="" ng-click="LogOut()">Logout</a></li>
-  <li ng-hide="authenticationVM.IsAuth"> <a href="/AdminSection/#/login">Login</a></li>
+<ul class="nav loginmenu">
+  <li><a href="/home">Users</a></li>
+  <li ng-hide="!authenticationVM.IsAuth"><a routerLink="shiptravel">Starship Travel & Resupply</a></li>
+  <li ng-if="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a routerLink="starships">Starships</a></li>
+  <li ng-if="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a routerLink="planets">Planets</a></li>
+  <li ng-if="authenticationVM.IsAuth"><a [routerLink]="">Welcome {{authenticationVM.UserName}}</a></li>
+  <li ng-hide="!authenticationVM.IsAuth"><a routerLink="" (click)="LogOut()">Logout</a></li>
+  <li ng-hide="authenticationVM.IsAuth"> <a routerLink="login">Login</a></li>
 </ul>

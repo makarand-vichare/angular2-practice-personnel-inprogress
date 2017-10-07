@@ -10,9 +10,9 @@ import { LoginComponent } from '../HomeSection/Components/LoginComponent';
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'planet', component: PlanetComponent },
+  { path: 'planets', component: PlanetComponent },
   { path: 'planet/:name', component: PlanetComponent },
-  { path: 'starship', component: StarShipComponent },
+  { path: 'starships', component: StarShipComponent },
   { path: 'starship/:name', component: StarShipComponent },
   { path: 'shiptravel', component: StarShipTravelComponent },
   { path: 'login', component: LoginComponent }

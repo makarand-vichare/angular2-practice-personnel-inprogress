@@ -10,6 +10,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
   selector: 'app-planet',
   templateUrl: './../Views/PlanetComponent.html',
+  styleUrls: ['./../Views/PlanetComponent.less'],
   providers: [PlanetService , LOG_LOGGER_PROVIDERS]
 })
 

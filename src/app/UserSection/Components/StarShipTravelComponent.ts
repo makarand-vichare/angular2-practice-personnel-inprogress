@@ -15,6 +15,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-shiptravel',
   templateUrl: './../Views/StarShipTravelComponent.html',
+  styleUrls: ['./../Views/StarShipTravelComponent.less'],
   providers: [PlanetService, StarShipTravelService , LOG_LOGGER_PROVIDERS]
 })
 
