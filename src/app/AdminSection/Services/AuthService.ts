@@ -2,10 +2,13 @@ import { LoginVM } from './../ViewModels/LoginVM';
 import { AuthenticationVM } from './../ViewModels/AuthenticationVM';
 import 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptionsArgs } from '@angular/http';
 import { Logger } from 'angular2-logger/core';
 import { BaseService } from '../../Common/Services/BaseService';
 import { LocalStorageService, LocalStorage } from 'ngx-webstorage';
+import { AppConstants } from '../../Common/AppConstants';
+import { AuthorizationVM } from '../ViewModels/AuthorizationVM';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService extends BaseService {
@@ -27,7 +30,7 @@ export class AuthService extends BaseService {
     const self = this;
     const data = 'grant_type=password&username=' + loginData.UserName + '&password=' + loginData.Password;
     const  config = {
-          'Accept': 'application/json', 
+          'Accept': 'application/json',
           'Access-Control-Allow-Headers': 'Content-Type, x-xsrf-token'
       } as RequestOptionsArgs;
 
@@ -77,7 +80,7 @@ export class AuthService extends BaseService {
 
   GetAntiForgeryToken = (): Promise<any> => {
     const self = this;
-    
+
     return self.httpService.get(AppConstants.AuthAPIUrl + '/api/Antiforgerytoken/GetAntiForgeryToken')
     .map(response => {
       const result = response.json();
