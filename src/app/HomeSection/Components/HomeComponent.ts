@@ -11,7 +11,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   selector: 'app-home',
   templateUrl: './../Views/HomeComponent.html',
   styleUrls: ['./../Views/HomeComponent.less'],
-  providers: [HomeService, LOG_LOGGER_PROVIDERS]
+  providers: [HomeService,LOG_LOGGER_PROVIDERS]
 })
 
 export class HomeComponent extends BaseComponent implements OnInit {

@@ -1,9 +1,9 @@
 <ul class="nav loginmenu">
   <li><a href="/home">Users</a></li>
-  <li ng-hide="!authenticationVM.IsAuth"><a routerLink="shiptravel">Starship Travel & Resupply</a></li>
-  <li ng-if="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a routerLink="starships">Starships</a></li>
-  <li ng-if="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a routerLink="planets">Planets</a></li>
-  <li ng-if="authenticationVM.IsAuth"><a [routerLink]="">Welcome {{authenticationVM.UserName}}</a></li>
-  <li ng-hide="!authenticationVM.IsAuth"><a routerLink="" (click)="LogOut()">Logout</a></li>
-  <li ng-hide="authenticationVM.IsAuth"> <a routerLink="login">Login</a></li>
+  <li [hidden]="!authenticationVM.IsAuth"><a routerLink="shiptravel">Starship Travel & Resupply</a></li>
+  <li *ngIf="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a routerLink="starships">Starships</a></li>
+  <li *ngIf="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a routerLink="planets">Planets</a></li>
+  <li *ngIf="authenticationVM.IsAuth"><a [routerLink]="">Welcome {{authenticationVM.UserName}}</a></li>
+  <li [hidden]="!authenticationVM.IsAuth"><a href="javascript:void(0);" (click)="LogOut()">Logout</a></li>
+  <li [hidden]="authenticationVM.IsAuth"> <a routerLink="login">Login</a></li>
 </ul>

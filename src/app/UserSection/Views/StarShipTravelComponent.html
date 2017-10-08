@@ -8,21 +8,20 @@
               <td>
                 <span class="resupply-count-caption">Starship Resupply Stop(s) Count</span>
                 <span class="pull-right">
-                                      <input type="number" required [class]="invalidDistance ? 'invalidDistance invalid':''"
-                                             class="form-control-static planet-distance"
-                                             [(ngModel)] ="planetDistance" placeholder="Enter Travel distance in MGLT" />
-                                      <button class="btn btn-info" (click)="GetShipsSupplyCount()">Calculate</button>
+                  <input type="number" required [class]="invalidDistance ? 'invalidDistance invalid':''" class="form-control-static planet-distance"
+                    [(ngModel)]="planetDistance" placeholder="Enter Travel distance in MGLT" />
+                  <button class="btn btn-info" (click)="GetShipsSupplyCount()">Calculate</button>
                 </span>
               </td>
             </tr>
             <tr>
               <td>
                 <span class="pull-right" *ngFor="let planet of GetReachablePlanets()">
-                    <button type="button" class="btn btn-link" (click)="doSomething()">My Link</button>
-               <a href="javascript:void(0)" (click)="OpenPlanetModel(planetModalTemplate,planet)">
-             <img [src]="'./assets/images/planets/'+ planet.name +'.jpeg'" class="imagesmallsize" alt="planet" />
-              </a>
-              </span>
+                  <button type="button" class="btn btn-link" (click)="doSomething()">My Link</button>
+                  <a href="javascript:void(0)" (click)="OpenPlanetModel(planetModalTemplate,planet)">
+                    <img [src]="'./assets/images/planets/'+ planet.name +'.jpeg'" class="imagesmallsize" alt="planet" />
+                  </a>
+                </span>
                 <span class="pull-right planets-lists">Planets in reach(click for more info) : </span>
               </td>
             </tr>
@@ -42,9 +41,13 @@
             <tr *ngFor="let starship of starshipModel.starships">
               <td>
                 <div>{{starship.name}}</div>
-                <div><img [src]="'./assets/images/starships/'+ starship.name +'.jpg'" class="imagesize" alt="here should be an image"
-                  /></div>
-                <div><button class="btn-xs btn-info pull-right" (click)="OpenStarShipModel(starShipModalTemplate,starship)">Details</button></div>
+                <div>
+                  <img [src]="'./assets/images/starships/'+ starship.name +'.jpg'" class="imagesize" alt="here should be an image"
+                  />
+                </div>
+                <div>
+                  <button class="btn-xs btn-info pull-right" (click)="OpenStarShipModel(starShipModalTemplate,starship)">Details</button>
+                </div>
               </td>
               <td>{{starship.crew}}</td>
               <td>{{starship.consumables}}</td>
@@ -69,8 +72,8 @@
         <div class="modal-header">
           <h3 class="modal-title">Starship Details</h3>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <div class="modal-body">
           <table summary="Starship Details" class="table table-bordered table-hover">

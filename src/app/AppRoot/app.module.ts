@@ -15,6 +15,9 @@ import { LoginComponent } from '../HomeSection/Components/LoginComponent';
 import { StarShipComponent } from './../AdminSection/Components/StarShipComponent';
 import { StarShipTravelComponent } from './../UserSection/Components/StarShipTravelComponent';
 import { PlanetComponent } from './../AdminSection/Components/PlanetComponent';
+import { AdminLandingComponent } from '../AdminSection/Components/AdminLandingComponent';
+import { UserLandingComponent } from '../UserSection/Components/UserLandingComponent';
+import { LOG_LOGGER_PROVIDERS } from 'angular2-logger/core';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { PlanetComponent } from './../AdminSection/Components/PlanetComponent';
     HomeComponent,
     LoginComponent,
     LoginMenuComponent,
-    TopMenuComponent
+    TopMenuComponent,
+    AdminLandingComponent,
+    UserLandingComponent
   ],
   imports: [
     NgbModule.forRoot(),

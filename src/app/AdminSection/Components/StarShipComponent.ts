@@ -12,7 +12,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   selector: 'app-starship',
   templateUrl: './../Views/StarShipComponent.html',
   styleUrls: ['./../Views/StarShipComponent.less'],
-  providers: [StarShipService , LOG_LOGGER_PROVIDERS]
+  providers: [StarShipService]
 })
 
 export class StarShipComponent extends BaseComponent implements OnInit {

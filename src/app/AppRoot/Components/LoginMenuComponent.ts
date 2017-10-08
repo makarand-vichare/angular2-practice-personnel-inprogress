@@ -1,15 +1,12 @@
 import { AuthService } from '../../AdminSection/Services/AuthService';
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {LOG_LOGGER_PROVIDERS , Logger} from 'angular2-logger/core';
 import { AuthenticationVM } from '../../AdminSection/ViewModels/AuthenticationVM';
-// import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-login-menu',
   templateUrl: './../Views/LoginMenuComponent.html',
-  styleUrls: ['./../Views/LoginMenuComponent.less'],
-  providers: [AuthService, LOG_LOGGER_PROVIDERS]
+  styleUrls: ['./../Views/LoginMenuComponent.less']
 })
 
 export class LoginMenuComponent implements OnInit {
@@ -20,8 +17,8 @@ export class LoginMenuComponent implements OnInit {
 
   ngOnInit() {
     const self = this;
-    self.authenticationVM =  self.authService.authVM;
-  }
+    self.authenticationVM = self.authService.GetAuthData();
+   }
 
   LogOut() {
     const self = this;

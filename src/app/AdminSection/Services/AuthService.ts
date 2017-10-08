@@ -18,7 +18,6 @@ export class AuthService extends BaseService {
   }
 
   isAuth = false;
-
   authVM: AuthenticationVM = {
     IsAuth: this.isAuth,
     UserName: '',
@@ -34,7 +33,7 @@ export class AuthService extends BaseService {
           'Access-Control-Allow-Headers': 'Content-Type, x-xsrf-token'
       } as RequestOptionsArgs;
 
-      return self.httpService.post(AppConstants.SWAPIUrl + '/token', data, config).map(response => {
+      return self.httpService.post(AppConstants.AuthAPIUrl + '/token', data, config).map(response => {
         const result = response.json();
         if (result != null) {
           self.localStorageService.store('authorizationData',
@@ -67,7 +66,7 @@ export class AuthService extends BaseService {
     self.authVM.Role = '';
   }
 
-  GetAuthData = () => {
+  GetAuthData = (): AuthenticationVM => {
     const self = this;
     const authData = self.localStorageService.retrieve('authorizationData') as AuthorizationVM;
     if (authData != null) {
@@ -76,6 +75,7 @@ export class AuthService extends BaseService {
       self.authVM.Id = authData.Id;
       self.authVM.Role = authData.Role;
     }
+    return self.authVM;
   }
 
   GetAntiForgeryToken = (): Promise<any> => {

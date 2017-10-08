@@ -11,8 +11,7 @@ import { LoginVM } from '../../AdminSection/ViewModels/LoginVM';
 @Component({
     selector: 'app-login',
     templateUrl: './../Views/LoginComponent.html',
-    styleUrls: ['./../Views/LoginComponent.less'],
-    providers: [AuthService, LOG_LOGGER_PROVIDERS]
+    styleUrls: ['./../Views/LoginComponent.less']
 })
 
 export class LoginComponent extends BaseComponent implements OnInit {
@@ -21,12 +20,11 @@ export class LoginComponent extends BaseComponent implements OnInit {
         super(_routerService, _logService, _toastr, _vRef);
     }
 
-    authenticationVM: AuthenticationVM;
     loginVM: LoginVM;
 
     ngOnInit() {
         const self = this;
-        self.loginVM = {
+         self.loginVM = {
             UserName: '',
             Password: ''
         } as LoginVM;
@@ -35,9 +33,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
     Login() {
         const self = this;
         self.authService.Login(self.loginVM).then(function (response: any) {
-            if (response.data != null) {
-                // const path = (response.data.role === 'admin') ? '/AdminSection' : '/UsersSection';
-                self.routerService.navigateByUrl('/home');
+            if (response.access_token != null) {
+                  const path = (response.role === 'admin') ? '/adminlanding' : '/userlanding';
+                  self.routerService.navigateByUrl(path);
             }
 
         })

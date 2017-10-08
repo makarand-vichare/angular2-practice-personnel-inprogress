@@ -11,7 +11,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   selector: 'app-planet',
   templateUrl: './../Views/PlanetComponent.html',
   styleUrls: ['./../Views/PlanetComponent.less'],
-  providers: [PlanetService , LOG_LOGGER_PROVIDERS]
+  providers: [PlanetService]
 })
 
 export class PlanetComponent extends BaseComponent implements OnInit {
