@@ -1,4 +1,4 @@
-<ul class="nav loginmenu">
+<ul class="loginmenu">
   <li><a routerLink="home">Users</a></li>
   <li [hidden]="!authenticationVM.IsAuth"><a routerLink="shiptravel">Starship Travel & Resupply</a></li>
   <li *ngIf="authenticationVM.IsAuth && authenticationVM.Role ==='admin'"><a routerLink="starships">Starships</a></li>

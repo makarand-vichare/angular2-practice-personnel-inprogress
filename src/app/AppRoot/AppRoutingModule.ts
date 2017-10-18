@@ -10,7 +10,7 @@ import { AuthGard } from '../AdminSection/Services/AuthGard';
 import { AdminLandingComponent } from './../AdminSection/Components/AdminLandingComponent';
 import { UserLandingComponent } from './../UserSection/Components/UserLandingComponent';
 import { AuthService } from '../AdminSection/Services/AuthService';
-import { LOG_LOGGER_PROVIDERS } from 'angular2-logger/core';
+import { LOG_LOGGER_PROVIDERS, Logger } from 'angular2-logger/core';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -32,6 +32,6 @@ const appRoutes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: [AuthGard, AuthService, LOG_LOGGER_PROVIDERS]
+  providers: [AuthGard, AuthService, Logger]
 })
 export class AppRoutingModule { }

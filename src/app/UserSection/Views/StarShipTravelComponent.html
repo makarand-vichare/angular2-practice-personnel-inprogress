@@ -68,7 +68,7 @@
           </tfoot>
         </table>
       </div>
-      <template #starShipModalTemplate let-c="close" let-d="dismiss">
+      <ng-template #starShipModalTemplate let-c="close" let-d="dismiss">
         <div class="modal-header">
           <h3 class="modal-title">Starship Details</h3>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -126,8 +126,8 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         </div>
-      </template>
-      <template #planetModalTemplate let-c="close" let-d="dismiss">
+      </ng-template>
+      <ng-template #planetModalTemplate let-c="close" let-d="dismiss">
         <div class="modal-header">
           <h3 class="modal-title">Planet Details</h3>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -173,7 +173,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
         </div>
-      </template>
+      </ng-template>
     </div>
   </div>
 </div>
