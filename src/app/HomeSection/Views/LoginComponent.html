@@ -1,13 +1,9 @@
-<!-- <form role="form"> -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2 class="form-login-heading">Login</h2>
-            <input type="text" class="form-control" placeholder="User Name" [(ngModel)]="loginVM.UserName" required autofocus>
-            <input type="password" class="form-control m-t-sm" placeholder="Password" [(ngModel)]="loginVM.Password" required>
-            <button class="btn btn-md btn-info btn-block m-t-sm loginbutton" type="submit" (click)="Login()">Login</button>
-            <div [hidden]="ProcessInfo.Message == ''" class="alert alert-danger">
-                {{ProcessInfo.Message}}
-            </div>
-        </div>
+<div class="col-md-12">
+    <h2 class="form-login-heading">Login</h2>
+    <input type="text" class="form-control" placeholder="User Name" [(ngModel)]="loginVM.UserName" required autofocus>
+    <input type="password" class="form-control m-t-sm" placeholder="Password" [(ngModel)]="loginVM.Password" required>
+    <button class="btn btn-md btn-info btn-block m-t-sm loginbutton" type="submit" (click)="Login()">Login</button>
+    <div [hidden]="ProcessInfo.Message == ''" class="alert alert-danger">
+        {{ProcessInfo.Message}}
     </div>
-<!-- </form> -->
+</div>
